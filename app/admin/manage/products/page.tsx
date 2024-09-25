@@ -13,7 +13,7 @@ interface Product {
   properties: string[];
 }
 
-function page() {
+function Page() {
   const [input, setInput] = useState<Product>({
     imageUrl: { image: "", id: "" },
     title: "",
@@ -124,4 +124,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
