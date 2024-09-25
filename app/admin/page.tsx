@@ -1,5 +1,11 @@
+import NewProduct from "@components/NewProduct";
+
 function page() {
-  return <div>page</div>;
+  return (
+    <div>
+      <NewProduct />
+    </div>
+  );
 }
 
 export default page;

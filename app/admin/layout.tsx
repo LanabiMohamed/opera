@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Nav from "./Nav";
 
 function layout({
   children,
@@ -6,12 +6,8 @@ function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
-      <nav>
-        <Link href="/admin">Products</Link>
-        <Link href="/admin/services">Services</Link>
-      </nav>
-      {children}
+    <main className="max-w-[70rem] mx-auto">
+      <Nav /> {children}
     </main>
   );
 }

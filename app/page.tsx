@@ -46,10 +46,10 @@ export default function Home() {
       <Image
         src={cover}
         alt="cover image"
-        className="object-cover md:max-h-80 min-h-60"
+        className="object-cover md:max-h-[29rem] min-h-56 w-full"
       />
 
-      <section className="max-w-[60rem] mx-auto my-10 p-4">
+      <section className="max-w-[70rem] mx-auto my-10 p-4">
         <h2 className="text-xl font-bold pb-2">Are you looking for...</h2>
         <div className="flex flex-col md:flex-row justify-between gap-4">
           {offers.map(
@@ -73,7 +73,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-[60rem] mx-auto my-10 p-4">
+      <section className="max-w-[70rem] mx-auto my-10 p-4">
         <h2 className="text-xl font-bold pb-2">What makes us special?</h2>
         <div className="flex flex-col md:flex-row justify-between ">
           {special.map(

@@ -1,15 +1,5 @@
 import { model, models, Schema } from "mongoose";
 
-const type = [
-  "Interior Walls Paints",
-  "Exterior Walls Paints",
-  "Primers, Putties and Thinners",
-  "Insulation and Protective Products",
-  "Steel Products",
-  "Wood Products",
-  "Floor Coatings",
-];
-
 const ProductSchema = new Schema({
   imageUrl: {
     type: String,
@@ -24,6 +14,10 @@ const ProductSchema = new Schema({
     required: true,
   },
   definition: {
+    type: String,
+    required: true,
+  },
+  destination: {
     type: [String],
     required: true,
   },

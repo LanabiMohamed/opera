@@ -16,7 +16,7 @@ function TopBar() {
   return (
     <div>
       <div className="md:bg-black md:text-white border-b">
-        <div className="flex justify-between max-w-[60rem] p-3 mx-auto items-center">
+        <div className="flex justify-between max-w-[70rem] p-3 mx-auto items-center">
           <PhoneNav />
           <Link href="/">
             <Image alt="logo" src={logo} className="h-8 w-28" />

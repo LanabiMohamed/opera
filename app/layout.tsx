@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@styles/globals.css";
 import TopBar from "@components/Topbar";
+import Sonner from "@components/Sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main>
+          <Sonner />
           <TopBar />
           {children}
         </main>
