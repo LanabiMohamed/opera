@@ -10,6 +10,7 @@ interface Product {
   type: string;
   destination: string[];
   properties: string[];
+  price: number;
 }
 
 function Page() {
@@ -20,9 +21,21 @@ function Page() {
     definition: "",
     destination: [],
     properties: [],
+    price: 0,
   });
+
+  const HandlePost = async () => {
+    const res = await fetch("/api/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/Json",
+      },
+      body: JSON.stringify({ ...input, imageUrl: input.imageUrl.id }),
+    });
+  };
+
   return (
-    <div>
+    <div className="p-2">
       <h3 className="text-xl text-center font-semibold mt-10 mb-4">Title</h3>
       <input
         value={input.title}
@@ -36,7 +49,7 @@ function Page() {
       />
 
       <h3 className="text-xl text-center font-semibold mt-10 mb-4">
-        description
+        Definition
       </h3>
       <textarea
         value={input.definition}
@@ -111,6 +124,20 @@ function Page() {
         multi
       />
 
+      <h3 className="text-xl text-center font-semibold mt-10 mb-4">Price</h3>
+
+      <div className="border border-gray-500 rounded-md overflow-hidden flex items-center px-2">
+        <input
+          value={input.price}
+          onChange={(e) =>
+            setInput((prev) => ({ ...prev, price: Number(e.target.value) }))
+          }
+          className="focus:outline-none flex-1 p-2"
+          type="number"
+        />
+        <p>Dzd</p>
+      </div>
+
       <ImagePost
         title={"Show the costumer the product"}
         clickMe={"click me"}
@@ -119,6 +146,13 @@ function Page() {
           setInput((prev) => ({ ...prev, imageUrl: { image, id } }));
         }}
       />
+
+      <button
+        onClick={HandlePost}
+        className="bg-gray-600 text-white p-2 rounded-md w-full mt-4 hover:bg-gray-500 duration-150"
+      >
+        Post
+      </button>
     </div>
   );
 }

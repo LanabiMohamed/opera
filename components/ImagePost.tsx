@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { notify } from "./Sonner";
 
 function ImagePost({
@@ -13,8 +13,11 @@ function ImagePost({
   HandleIsDone: (image: string, id: string) => void;
 }) {
   const [loading, setLoading] = useState(false);
-  const convertToBase64 = (file: any) => {
-    if (!file) return;
+
+  const convertToBase64 = (
+    file: File
+  ): Promise<string | ArrayBuffer | null> => {
+    if (!file) return Promise.reject("No file provided");
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -27,11 +30,17 @@ function ImagePost({
     });
   };
 
-  const HandleAddPicture = async (file: any) => {
+  const HandleAddPicture = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setLoading(true);
-    const UploadedImage = (await convertToBase64(
-      file.target.files[0]
-    )) as string;
+    const file = event.target.files?.[0];
+    if (!file) {
+      setLoading(false);
+      return notify({ type: "error", message: "No file selected" });
+    }
+
+    const UploadedImage = (await convertToBase64(file)) as string;
     const response = await fetch(
       `/api/image${image.id ? "/" + image.id : ""}`,
       {
