@@ -1,6 +1,5 @@
 "use client";
 import Image from "@components/Image";
-import ListManager from "@components/ListManager";
 import Select from "@components/Select";
 import { useState } from "react";
 
