@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { notify } from "./Sonner";
 
-function Image({
+function ImagePost({
   title,
   clickMe,
   image,
@@ -76,4 +76,4 @@ function Image({
   );
 }
 
-export default Image;
+export default ImagePost;

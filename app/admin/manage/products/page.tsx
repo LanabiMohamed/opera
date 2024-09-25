@@ -1,5 +1,5 @@
 "use client";
-import Image from "@components/Image";
+import ImagePost from "@components/ImagePost";
 import Select from "@components/Select";
 import { useState } from "react";
 
@@ -111,12 +111,12 @@ function Page() {
         multi
       />
 
-      <Image
+      <ImagePost
         title={"Show the costumer the product"}
         clickMe={"click me"}
         image={input.imageUrl}
         HandleIsDone={(image, id) => {
-          setInput((prev) => ({ ...prev!, imageUrl: { image, id } }));
+          setInput((prev) => ({ ...prev, imageUrl: { image, id } }));
         }}
       />
     </div>
