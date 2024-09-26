@@ -6,7 +6,7 @@ function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="max-w-[70rem] mx-auto">
+    <main className="max-w-[70rem] mx-auto p-2">
       <Nav /> {children}
     </main>
   );

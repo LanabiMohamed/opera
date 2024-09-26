@@ -8,9 +8,11 @@ function Nav() {
   return (
     <nav className="border-b flex">
       <Link
-        href="/admin"
+        href="/admin/product"
         className={`p-4 ${
-          pathname === "/admin" ? "font-semibold border-b border-black" : ""
+          pathname === "/admin/product"
+            ? "font-semibold border-b border-black"
+            : ""
         }`}
       >
         Products

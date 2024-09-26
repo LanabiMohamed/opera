@@ -2,7 +2,8 @@
 import ImagePost from "@components/ImagePost";
 import Select from "@components/Select";
 import { notify } from "@components/Sonner";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { IoTrashBinSharp } from "react-icons/io5";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -14,10 +15,13 @@ interface Product {
   type: string;
   destination: string[];
   properties: string[];
-  variances: { id: string; quantity: string; price: number }[];
+  variances: { quantity: string; price: number }[];
 }
 
 function Page() {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const id = params.get("id");
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState<Product>({
     imageUrl: { image: "", id: "" },
@@ -28,6 +32,27 @@ function Page() {
     properties: [],
     variances: [],
   });
+
+  useEffect(() => {
+    if (!id) return;
+    const HandleFetchProduct = async () => {
+      const res = await fetch(`/api/products/${id}`);
+      if (!res.ok) {
+        notify({ type: "error", message: "Failed to fetch the product" });
+        return;
+      }
+      const product = await res.json();
+      setInput(product);
+
+      const response = await fetch(`/api/image/${product.imageUrl}`);
+      const { image } = await response.json();
+      setInput((prev) => ({
+        ...prev,
+        imageUrl: { image, id: product.imageUrl },
+      }));
+    };
+    HandleFetchProduct();
+  }, [id]);
 
   const [variances, setVariances] = useState({
     quantity: 0,
@@ -48,8 +73,8 @@ function Page() {
       return notify({ type: "warning", message: "Fill all the fields" });
     setLoading(true);
 
-    const res = await fetch("/api/product", {
-      method: "POST",
+    const res = await fetch("/api/products", {
+      method: id ? "PATCH" : "POST",
       headers: {
         "Content-Type": "Application/Json",
       },
@@ -236,8 +261,9 @@ function Page() {
               if (
                 input.variances.find(
                   (sub) =>
-                    sub.id ===
-                    `${variances.quantity}|${variances.unit}|${variances.price}`
+                    sub.quantity ===
+                      `${variances.quantity} ${variances.unit}` &&
+                    sub.price === variances.price
                 )
               )
                 return notify({
@@ -268,7 +294,9 @@ function Page() {
                 setInput((prev) => ({
                   ...prev,
                   variances: prev.variances.filter(
-                    (subsub) => subsub.id !== sub.id
+                    (subsub) =>
+                      subsub.quantity !== sub.quantity ||
+                      subsub.price !== sub.price
                   ),
                 }))
               }
@@ -298,7 +326,7 @@ function Page() {
         className="bg-gray-600 text-white p-2 rounded-md w-full mt-4 hover:bg-gray-500 duration-150 flex items-center gap-2 justify-center"
         disabled={loading}
       >
-        Post
+        {id ? "Update" : "Post"}
         {loading && <ClipLoader color="white" size={20} />}
       </button>
     </div>
