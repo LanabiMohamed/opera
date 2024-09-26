@@ -18,10 +18,10 @@ function Nav() {
 
       <Link
         href="/admin/manage/products"
-        className={`p-4 hover:scale-125 duration-200  ${
+        className={`p-4  ${
           pathname === "/admin/manage/products"
             ? "font-semibold border-b border-black"
-            : ""
+            : "hover:scale-125 duration-200"
         }`}
       >
         <IoMdAdd size={23} />
@@ -40,10 +40,10 @@ function Nav() {
 
       <Link
         href="/admin/manage/services"
-        className={`p-4 hover:scale-125 duration-200  ${
+        className={`p-4  ${
           pathname === "/admin/manage/services"
             ? "font-semibold border-b border-black"
-            : ""
+            : "hover:scale-125 duration-200"
         }`}
       >
         <IoMdAdd size={23} />

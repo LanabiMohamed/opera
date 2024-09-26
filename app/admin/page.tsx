@@ -1,11 +1,8 @@
-import NewProduct from "@components/NewProduct";
+import { redirect } from "next/navigation";
 
 function page() {
-  return (
-    <div>
-      <NewProduct />
-    </div>
-  );
+  redirect("/admin/product");
+  return <div></div>;
 }
 
 export default page;
