@@ -5,7 +5,7 @@ import highQuality from "@public/highQuality.jpg";
 import home from "@public/home.jpg";
 import painter from "@public/painter.png";
 import extiror from "@public/exterior.png";
-import interior from "@public/interior.png";
+import conseils from "@public/conseils.jpg";
 import Link from "next/link";
 
 export default function Home() {
@@ -32,12 +32,12 @@ export default function Home() {
     },
     {
       src: extiror,
-      title: "Extiror Paints",
+      title: "Paints",
       href: "/",
     },
     {
-      src: interior,
-      title: "Interior Paints",
+      src: conseils,
+      title: "Conseils",
       href: "/",
     },
   ];

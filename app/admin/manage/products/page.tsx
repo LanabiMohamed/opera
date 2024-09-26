@@ -1,5 +1,6 @@
 "use client";
 import ImagePost from "@components/ImagePost";
+import Loader from "@components/Loader";
 import Select from "@components/Select";
 import { notify } from "@components/Sonner";
 import { useSearchParams } from "next/navigation";
@@ -23,31 +24,36 @@ function Page() {
   const params = new URLSearchParams(searchParams);
   const id = params.get("id");
   const [loading, setLoading] = useState(false);
-  const [input, setInput] = useState<Product>({
-    imageUrl: { image: "", id: "" },
-    title: "",
-    type: "",
-    definition: "",
-    destination: [],
-    properties: [],
-    variances: [],
-  });
+  const [input, setInput] = useState<Product | undefined>(
+    id
+      ? undefined
+      : {
+          imageUrl: { image: "", id: "" },
+          title: "",
+          type: "",
+          definition: "",
+          destination: [],
+          properties: [],
+          variances: [],
+        }
+  );
 
   useEffect(() => {
     if (!id) return;
     const HandleFetchProduct = async () => {
-      const res = await fetch(`/api/products/${id}`);
+      const res = await fetch(`/api/products/${id}`, {
+        cache: "no-cache",
+      });
       if (!res.ok) {
         notify({ type: "error", message: "Failed to fetch the product" });
         return;
       }
       const product = await res.json();
       setInput(product);
-
       const response = await fetch(`/api/image/${product.imageUrl}`);
       const { image } = await response.json();
       setInput((prev) => ({
-        ...prev,
+        ...prev!,
         imageUrl: { image, id: product.imageUrl },
       }));
     };
@@ -59,6 +65,8 @@ function Page() {
     price: 0,
     unit: "L",
   });
+
+  if (!input) return <Loader />;
 
   const HandlePost = async () => {
     if (loading) return;
@@ -73,7 +81,7 @@ function Page() {
       return notify({ type: "warning", message: "Fill all the fields" });
     setLoading(true);
 
-    const res = await fetch("/api/products", {
+    const res = await fetch("/api/manage/products", {
       method: id ? "PATCH" : "POST",
       headers: {
         "Content-Type": "Application/Json",
@@ -103,7 +111,7 @@ function Page() {
       <input
         value={input.title}
         onChange={(e) =>
-          setInput((prev) => ({ ...prev, title: e.target.value }))
+          setInput((prev) => ({ ...prev!, title: e.target.value }))
         }
         className={`border border-gray-500 focus:outline-none w-full p-2 rounded-md ${
           false ? "rtl text-right" : ""
@@ -117,7 +125,7 @@ function Page() {
         value={input.definition}
         onChange={(e) =>
           setInput((prev) => ({
-            ...prev,
+            ...prev!,
             definition: e.target.value,
           }))
         }
@@ -135,16 +143,15 @@ function Page() {
           { label: "Interior Walls Paints", key: "Interior Walls Paints" },
           { label: "Exterior Walls Paints", key: "Exterior Walls Paints" },
           {
-            label: "Insulation and Protective Products",
-            key: "Insulation and Protective Products",
+            label: "Protective Products",
+            key: "Protective Products",
           },
           { label: "Steel Products", key: "Steel Products" },
           { label: "Wood Products", key: "Wood Products" },
-          { label: "Floor Coatings", key: "Floor Coatings" },
         ]}
         onChangeHere={(item) =>
           setInput((prev) => ({
-            ...prev,
+            ...prev!,
             type: item,
           }))
         }
@@ -167,10 +174,10 @@ function Page() {
         ]}
         onChangeHere={(item) =>
           setInput((prev) => ({
-            ...prev,
-            destination: prev.destination.includes(item)
-              ? prev.destination.filter((sub) => sub !== item)
-              : [...prev.destination, item],
+            ...prev!,
+            destination: prev!.destination.includes(item)
+              ? prev!.destination.filter((sub) => sub !== item)
+              : [...prev!.destination, item],
           }))
         }
         value={input.destination}
@@ -199,10 +206,10 @@ function Page() {
         ]}
         onChangeHere={(item) =>
           setInput((prev) => ({
-            ...prev,
-            properties: prev.properties.includes(item)
-              ? prev.properties.filter((sub) => sub !== item)
-              : [...prev.properties, item],
+            ...prev!,
+            properties: prev!.properties.includes(item)
+              ? prev!.properties.filter((sub) => sub !== item)
+              : [...prev!.properties, item],
           }))
         }
         value={input.properties}
@@ -271,9 +278,9 @@ function Page() {
                   message: "This variance already exists",
                 });
               setInput((prev) => ({
-                ...prev,
+                ...prev!,
                 variances: [
-                  ...prev.variances,
+                  ...prev!.variances,
                   {
                     id: `${variances.quantity}|${variances.unit}|${variances.price}`,
                     quantity: `${variances.quantity} ${variances.unit}`,
@@ -292,8 +299,8 @@ function Page() {
               className="relative text-center border border-gray-500 p-3 rounded-md"
               onClick={() =>
                 setInput((prev) => ({
-                  ...prev,
-                  variances: prev.variances.filter(
+                  ...prev!,
+                  variances: prev!.variances.filter(
                     (subsub) =>
                       subsub.quantity !== sub.quantity ||
                       subsub.price !== sub.price
@@ -317,7 +324,7 @@ function Page() {
         clickMe={"click me"}
         image={input.imageUrl}
         HandleIsDone={(image, id) => {
-          setInput((prev) => ({ ...prev, imageUrl: { image, id } }));
+          setInput((prev) => ({ ...prev!, imageUrl: { image, id } }));
         }}
       />
 

@@ -1,30 +1,37 @@
 import LoadImage from "@components/LoadImage";
 import { MdEdit } from "react-icons/md";
-
 import Delete from "./Delete";
 import Link from "next/link";
+import Pagin from "./Pagin";
 
-async function Table() {
-  const res = await fetch(`${process.env.URL}/api/products`, {
+async function Table({ p }: { p: string }) {
+  const res = await fetch(`${process.env.URL}/api/manage/products?p=${p}`, {
     cache: "no-cache",
   });
-  if (!res.ok) {
-    return <div>Failed to fetch</div>;
-  }
-  const products = await res.json();
+  if (!res.ok) return <div>Failed to fetch</div>;
+
+  const { products, count } = await res.json();
   return (
-    <div className="">
+    <div>
       {products.map(
-        (product: {
-          _id: string;
-          title: string;
-          imageUrl: string;
-          type: string;
-        }) => {
+        (
+          product: {
+            _id: string;
+            title: string;
+            imageUrl: string;
+            type: string;
+          },
+          index: number
+        ) => {
           const datt = new Date(products[0].createdAt);
           return (
-            <div key={product._id} className="flex justify-between my-2">
-              <div className="flex gap-2">
+            <div
+              key={product._id}
+              className={`flex justify-between my-2 ${
+                index && "border-t border-gray-400"
+              }`}
+            >
+              <Link href="/admin/manage/products" className="flex gap-2 flex-1">
                 <LoadImage
                   Css="object-contain rounded-md w-36 md:w-52"
                   Url={product.imageUrl}
@@ -38,7 +45,7 @@ async function Table() {
                     .toString()
                     .padStart(2, "0")} - ${datt.getFullYear()}`}</p>
                 </div>
-              </div>
+              </Link>
               <div>
                 <Link
                   href={{
@@ -57,6 +64,7 @@ async function Table() {
           );
         }
       )}
+      <Pagin p={p} count={count} />
     </div>
   );
 }

@@ -9,7 +9,7 @@ function Delete({ id }: { id: string }) {
 
   const HandleDelele = async () => {
     setLoading(true);
-    const res = await fetch("/api/products", {
+    const res = await fetch("/api/manage/products", {
       method: "DELETE",
       body: JSON.stringify({ id }),
     });
