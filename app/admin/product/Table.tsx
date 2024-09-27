@@ -31,7 +31,13 @@ async function Table({ p }: { p: string }) {
                 index && "border-t border-gray-400"
               }`}
             >
-              <Link href="/admin/manage/products" className="flex gap-2 flex-1">
+              <Link
+                href={{
+                  pathname: "/product",
+                  query: { id: product._id },
+                }}
+                className="flex gap-2 flex-1"
+              >
                 <LoadImage
                   Css="object-contain rounded-md w-36 md:w-52"
                   Url={product.imageUrl}

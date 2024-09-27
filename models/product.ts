@@ -38,6 +38,51 @@ const ProductSchema = new Schema(
         },
       },
     ],
+
+    //Caracteristiques technique
+    densite: {
+      type: String,
+      required: true,
+    },
+    rendement: {
+      type: String,
+      required: true,
+    },
+    tempsSachage: {
+      type: String,
+      required: true,
+    },
+    aspectdifilmsec: {
+      type: [String],
+      required: true,
+    },
+    teinte: {
+      type: String,
+    },
+    viscosite: {
+      type: String,
+    },
+
+    //mise en oeuvre
+    dilution: {
+      type: String,
+      required: true,
+    },
+    supports: {
+      type: [String],
+      required: true,
+    },
+    materielApplication: {
+      type: [String],
+      required: true,
+    },
+    nettoyageMateriel: {
+      type: String,
+    },
+    preparationSupport: {
+      type: String,
+    },
+
     colors: {
       type: [String],
     },

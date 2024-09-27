@@ -1,51 +1,36 @@
 import LoadImage from "@components/LoadImage";
 import Link from "next/link";
-import Pagin from "./Pagin";
-import { Suspense } from "react";
-import emptyState from "@public/emptystate.png";
 
 interface Product {
   _id: string;
   imageUrl: string;
   title: string;
-  type: string;
   definition: string;
   destination: string[];
-  properties: string[];
   variances: {
     quantity: string;
     price: number;
   }[];
-  colors: string[];
 }
 
-async function Table({
-  filters: { t, p },
-}: {
-  filters: {
-    t: string;
-    p: string;
-  };
-}) {
-  const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {
+async function Table() {
+  const res = await fetch(`${process.env.URL}/api/products?q=latest`, {
     cache: "no-cache",
   });
   if (!res.ok) return <div>Error Getting Products</div>;
-  const { products, count } = await res.json();
-  if (products.length === 0)
-    return (
-      <div className="flex justify-center items-center flex-col gap-4 py-32">
-        <img src={emptyState.src} />
-        <h2>No results here</h2>
-      </div>
-    );
+  const products = await res.json();
+
   return (
     <div className="my-4">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div className="flex gap-2 overflow-y-auto styled-scrollbar pb-2">
         {products.map((product: Product) => (
-          <Link href={`/product?id=${product._id}`} key={product._id}>
+          <Link
+            href={`/product?id=${product._id}`}
+            key={product._id}
+            className="min-w-80"
+          >
             <LoadImage
-              Css="w-full h-32 md:h-52 object-cover rounded-lg"
+              Css="w-full h-32 md:h-52 object-contain rounded-lg"
               Url={product.imageUrl}
             />
             <div className="p-1 font-semibold">
@@ -68,9 +53,6 @@ async function Table({
           </Link>
         ))}
       </div>
-      <Suspense>
-        <Pagin p={p} count={count} />
-      </Suspense>
     </div>
   );
 }

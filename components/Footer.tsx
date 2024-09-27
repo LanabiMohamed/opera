@@ -9,8 +9,8 @@ import logo from "@public/logo.png";
 function Footer() {
   return (
     <footer className="bg-gray-100 pb-10">
-      <Image alt="Opera Peinture" src={logo} className="w-72 mx-auto py-10" />
-      <div className="max-w-[70rem] mx-auto p-2 flex justify-between items-start md:items-center flex-col md:flex-row">
+      <div className="max-w-[70rem] mx-auto p-2 flex justify-center md:justify-around  items-center flex-col md:flex-row">
+        <Image alt="Opera Peinture" src={logo} className="w-44 md:w-60 py-6" />
         <div>
           <h2 className="text-xl font-semibold pb-2">Download the app</h2>
           <div className="flex gap-2">
@@ -18,14 +18,43 @@ function Footer() {
             <IoLogoGooglePlaystore size={35} />
           </div>
         </div>
+      </div>
+      <div className="flex justify-center">
         <div className="py-4">
-          <h2 className="text-xl font-semibold pb-2">Connect With Us</h2>
-          <div className="flex flex-wrap gap-6">
-            <FaFacebookF size={35} />
-            <FaInstagram size={35} />
-            <FaLinkedinIn size={35} />
-            <FiYoutube size={35} />
-            <FaXTwitter size={35} />
+          <h2 className="text-xl text-center md:text-start font-semibold pb-2">
+            Connect With Us
+          </h2>
+          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-gray-800">
+            <a
+              href="https://www.facebook.com/operapeintureofficiel/"
+              target="_blank"
+            >
+              <FaFacebookF size={35} />
+            </a>
+            <a
+              href="https://www.instagram.com/operapeinture/?hl=en"
+              target="_blank"
+            >
+              <FaInstagram size={35} />
+            </a>
+
+            <a
+              href="https://www.youtube.com/channel/UChY88pBKtBtzjPVXgA82WZg"
+              target="_blank"
+            >
+              <FiYoutube size={35} />
+            </a>
+
+            <a href="https://twitter.com/operapeinture?lang=en" target="_blank">
+              <FaXTwitter size={35} />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/company/opera-peinture/"
+              target="_blank"
+            >
+              <FaLinkedinIn size={35} />
+            </a>
             <div className="flex items-center gap-2">
               <MdAlternateEmail size={35} />
               <b>Contact@operapeinture.com</b>

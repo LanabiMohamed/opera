@@ -7,7 +7,7 @@ import Image from "next/image";
 const navs = [
   { name: "Colors", href: "/colors" },
   { name: "Products", href: "/products" },
-  { name: "Our Services", href: "/services" },
+  { name: "Painter", href: "/painter" },
   { name: "Inspiration", href: "/inspiration" },
   { name: "How to & Tips", href: "/tips" },
 ];

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { IoTrashBinSharp } from "react-icons/io5";
 import ClipLoader from "react-spinners/ClipLoader";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 interface Product {
   imageUrl: { image: string; id: string };
@@ -17,6 +18,19 @@ interface Product {
   destination: string[];
   properties: string[];
   variances: { quantity: string; price: number }[];
+  //Caracteristiques technique
+  densite: string;
+  rendement: string;
+  tempsSachage: string;
+  aspectdifilmsec: string[];
+  teinte: string;
+  viscosite: string;
+  //mise en oeuvre
+  dilution: string;
+  supports: string[];
+  materielApplication: string[];
+  nettoyageMateriel: string;
+  preparationSupport: string;
 }
 
 function Page() {
@@ -35,9 +49,23 @@ function Page() {
           destination: [],
           properties: [],
           variances: [],
+          densite: "",
+          rendement: "",
+          tempsSachage: "",
+          aspectdifilmsec: [],
+          teinte: "",
+          viscosite: "",
+          dilution: "",
+          supports: [],
+          materielApplication: [],
+          nettoyageMateriel: "",
+          preparationSupport: "",
         }
   );
-
+  const [Toggles, setToggles] = useState({
+    ficheT: true,
+    miseOeuvre: true,
+  });
   useEffect(() => {
     if (!id) return;
     const HandleFetchProduct = async () => {
@@ -49,7 +77,29 @@ function Page() {
         return;
       }
       const product = await res.json();
-      setInput(product);
+      setInput({
+        densite: "",
+        rendement: "",
+        tempsSachage: "",
+        aspectdifilmsec: [],
+        teinte: "",
+        viscosite: "",
+        dilution: "",
+        supports: [],
+        materielApplication: [],
+        nettoyageMateriel: "",
+        preparationSupport: "",
+        ...product,
+      });
+      setDensite(
+        product.densite
+          ? {
+              from: Number(product.densite.split(" ")[0]),
+              to: Number(product.densite.split(" ")[2]),
+              unit: product.densite.split(" ")[1],
+            }
+          : { from: 0, to: 0, unit: "-/+" }
+      );
       const response = await fetch(`/api/image/${product.imageUrl}`);
       const { image } = await response.json();
       setInput((prev) => ({
@@ -65,6 +115,11 @@ function Page() {
     price: 0,
     unit: "L",
   });
+  const [densite, setDensite] = useState({
+    from: 0,
+    to: 0,
+    unit: "-/+",
+  });
 
   if (!input) return <Loader />;
 
@@ -76,7 +131,16 @@ function Page() {
       !input.definition ||
       !input.destination.length ||
       !input.properties.length ||
-      !input.variances.length
+      !input.variances.length ||
+      !densite.from ||
+      !densite.to ||
+      !densite.unit ||
+      !input.rendement ||
+      !input.tempsSachage ||
+      !input.aspectdifilmsec.length ||
+      !input.dilution ||
+      !input.supports.length ||
+      !input.materielApplication.length
     )
       return notify({ type: "warning", message: "Fill all the fields" });
     setLoading(true);
@@ -86,7 +150,11 @@ function Page() {
       headers: {
         "Content-Type": "Application/Json",
       },
-      body: JSON.stringify({ ...input, imageUrl: input.imageUrl.id }),
+      body: JSON.stringify({
+        ...input,
+        imageUrl: input.imageUrl.id,
+        densite: `${densite.from} ${densite.unit} ${densite.to}`,
+      }),
     });
     if (res.ok) {
       notify({ type: "success", message: "Product posted successfully" });
@@ -98,6 +166,17 @@ function Page() {
         destination: [],
         properties: [],
         variances: [],
+        densite: "",
+        rendement: "",
+        tempsSachage: "",
+        aspectdifilmsec: [],
+        teinte: "",
+        viscosite: "",
+        dilution: "",
+        supports: [],
+        materielApplication: [],
+        nettoyageMateriel: "",
+        preparationSupport: "",
       });
     } else {
       notify({ type: "error", message: "Error posting the product" });
@@ -192,6 +271,10 @@ function Page() {
         labelslist={[
           { label: "Tres haute resistance", key: "Tres haute resistance" },
           { label: "Extra brilliant", key: "Extra brilliant" },
+          {
+            label: "Effects decoratifs metallise",
+            key: "Effects decoratifs metallise",
+          },
           { label: "Durable", key: "Hotel" },
           { label: "Tres bonne tenue", key: "Tres bonne tenue" },
           { label: "Tres faible odeur", key: "Tres faible odeur" },
@@ -328,6 +411,344 @@ function Page() {
         }}
       />
 
+      <div className="flex items-end gap-2 my-10">
+        <div className="flex-1 h-0.5 bg-black"></div>
+        <div
+          className="flex items-center gap-1 cursor-pointer"
+          onClick={() =>
+            setToggles((prev) => ({
+              ...prev,
+              ficheT: !prev.ficheT,
+            }))
+          }
+        >
+          <h2 className="text-black">Caracteristiques technique</h2>
+          {Toggles.ficheT ? <FaAngleUp /> : <FaAngleDown />}
+        </div>
+      </div>
+      {Toggles.ficheT && (
+        <div>
+          <div className="flex items-center justify-around">
+            <b className="text-lg">Densite a 20° - 25° C</b>
+            <div className="flex items-center gap-3">
+              <input
+                type="number"
+                value={densite.from}
+                onChange={(e) =>
+                  setDensite((prev) => ({
+                    ...prev,
+                    from: Number(e.target.value),
+                  }))
+                }
+                className="w-24 border border-black rounded-md px-2"
+              />
+              <select
+                className="bg-white focus:outline-none p-2"
+                value={densite.unit}
+                onChange={(e) =>
+                  setDensite((prev) => ({ ...prev, unit: e.target.value }))
+                }
+              >
+                <option value="-/+">-/+</option>
+                <option value="+/-">+/-</option>
+              </select>
+              <input
+                type="number"
+                value={densite.to}
+                onChange={(e) =>
+                  setDensite((prev) => ({
+                    ...prev,
+                    to: Number(e.target.value),
+                  }))
+                }
+                className="w-24 border border-black rounded-md px-2"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-around my-10">
+            <b className="text-lg">Rendement</b>
+            <div className="flex items-center gap-3">
+              <input
+                value={input.rendement}
+                onChange={(e) =>
+                  setInput((prev) => ({
+                    ...prev!,
+                    rendement: e.target.value,
+                  }))
+                }
+                className="w-24 border border-black rounded-md px-2"
+              />
+              <p>{`m² / ${
+                input.variances[0]?.quantity.split(" ")[1] ?? "L"
+              }`}</p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-around my-10">
+            <b className="text-lg">Temps de sechage a 35° C</b>
+            <div className="flex items-center gap-3">
+              <input
+                value={input.tempsSachage}
+                onChange={(e) =>
+                  setInput((prev) => ({
+                    ...prev!,
+                    tempsSachage: e.target.value,
+                  }))
+                }
+                className="w-24 border border-black rounded-md px-2"
+              />
+              <p>h</p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-around my-10">
+            <b className="text-lg">Viscosite</b>
+            <div className="flex items-center gap-3">
+              <input
+                value={input.viscosite}
+                onChange={(e) =>
+                  setInput((prev) => ({
+                    ...prev!,
+                    viscosite: e.target.value,
+                  }))
+                }
+                className="w-44 border border-black rounded-md px-2"
+              />
+            </div>
+          </div>
+
+          <div className="my-10">
+            <p className="text-lg text-center pb-4 font-semibold">
+              Aspect du film sec
+            </p>
+            <Select
+              borderColor="border-green-600"
+              selectedBorderColor="border-gray-500"
+              labelslist={[
+                {
+                  label: "Sable",
+                  key: "Sable",
+                },
+                {
+                  label: "Nacre",
+                  key: "Nacre",
+                },
+                {
+                  label: "Soyeux",
+                  key: "Soyeux",
+                },
+                { label: "Liminescent", key: "Liminescent" },
+                { label: "Mat", key: "Mat" },
+                { label: "Brillant", key: "Brillant" },
+                { label: "Satine", key: "Satine" },
+                { label: "Metallise", key: "Metallise" },
+                { label: "Lumineaux", key: "Lumineaux" },
+              ]}
+              onChangeHere={(item) =>
+                setInput((prev) => ({
+                  ...prev!,
+                  aspectdifilmsec: prev!.aspectdifilmsec.includes(item)
+                    ? prev!.aspectdifilmsec.filter((sub) => sub !== item)
+                    : [...prev!.aspectdifilmsec, item],
+                }))
+              }
+              value={input.aspectdifilmsec}
+              multi
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-end gap-2 my-10">
+        <div className="flex-1 h-0.5 bg-black"></div>
+        <div
+          className="flex items-center gap-1 cursor-pointer"
+          onClick={() =>
+            setToggles((prev) => ({
+              ...prev,
+              miseOeuvre: !prev.miseOeuvre,
+            }))
+          }
+        >
+          <h2 className="text-black">Mise en oeuvre</h2>
+          {Toggles.miseOeuvre ? <FaAngleUp /> : <FaAngleDown />}
+        </div>
+      </div>
+      {Toggles.miseOeuvre && (
+        <div>
+          <div className="my-10">
+            <p className="text-lg text-center pb-4 font-semibold">
+              Preparation Support
+            </p>
+
+            <Select
+              borderColor="border-green-600"
+              selectedBorderColor="border-gray-500"
+              labelslist={[
+                {
+                  label:
+                    "Le Support droit etre parfaitement propre, sec et sain. ",
+                  key: "Le Support droit etre parfaitement propre, sec et sain. ",
+                },
+              ]}
+              onChangeHere={(item) =>
+                setInput((prev) => ({
+                  ...prev!,
+                  preparationSupport:
+                    prev!.preparationSupport === item ? "" : item,
+                }))
+              }
+              value={input.preparationSupport}
+            />
+          </div>
+
+          <div className="flex items-center justify-around my-10">
+            <p className="text-lg text-center pb-4 font-semibold">
+              Nettoyage de Materiel
+            </p>
+
+            <Select
+              borderColor="border-green-600"
+              selectedBorderColor="border-gray-500"
+              labelslist={[
+                {
+                  label: "Diluant",
+                  key: "Diluant",
+                },
+                { label: "Eau", key: "Eau" },
+              ]}
+              onChangeHere={(item) =>
+                setInput((prev) => ({
+                  ...prev!,
+                  nettoyageMateriel:
+                    prev!.nettoyageMateriel === item ? "" : item,
+                }))
+              }
+              value={input.nettoyageMateriel}
+            />
+          </div>
+
+          <div className="my-10">
+            <p className="text-lg text-center pb-4 font-semibold">
+              Materiel d'application
+            </p>
+
+            <Select
+              borderColor="border-green-600"
+              selectedBorderColor="border-gray-500"
+              labelslist={[
+                {
+                  label: "Rouleau",
+                  key: "Rouleau",
+                },
+                { label: "Rouleau laquer", key: "Rouleau laquer" },
+                { label: "Rouleau decorative", key: "Rouleau decorative" },
+                {
+                  label: "Pistolet",
+                  key: "Pistolet",
+                },
+                { label: "Pistolet airless", key: "Pistolet airless" },
+                { label: "Pinceau", key: "Pinceau" },
+                { label: "Pinceau eponge", key: "Pinceau eponge" },
+                { label: "Couteau", key: "Couteau" },
+                { label: "Brosse", key: "Brosse" },
+              ]}
+              onChangeHere={(item) =>
+                setInput((prev) => ({
+                  ...prev!,
+                  materielApplication: prev!.materielApplication.includes(item)
+                    ? prev!.materielApplication.filter((sub) => sub !== item)
+                    : [...prev!.materielApplication, item],
+                }))
+              }
+              value={input.materielApplication}
+              multi
+            />
+          </div>
+
+          <div className="my-10">
+            <p className="text-lg text-center pb-4 font-semibold">Supports</p>
+            <Select
+              borderColor="border-green-600"
+              selectedBorderColor="border-gray-500"
+              labelslist={[
+                {
+                  label: "Platre",
+                  key: "Platre",
+                },
+                {
+                  label: "Ciment",
+                  key: "Ciment",
+                },
+
+                {
+                  label: "Enduit",
+                  key: "Enduit",
+                },
+
+                { label: "Metal", key: "Metal" },
+
+                { label: "Brique", key: "Brique" },
+                { label: "Pierre", key: "Pierre" },
+                { label: "Sol", key: "Sol" },
+                { label: "Faience", key: "Faience" },
+                { label: "Carreiage", key: "Carreiage" },
+                { label: "Beton", key: "Beton" },
+                { label: "Bios", key: "Bios" },
+              ]}
+              onChangeHere={(item) =>
+                setInput((prev) => ({
+                  ...prev!,
+                  supports: prev!.supports.includes(item)
+                    ? prev!.supports.filter((sub) => sub !== item)
+                    : [...prev!.supports, item],
+                }))
+              }
+              value={input.supports}
+              multi
+            />
+          </div>
+
+          <div className="my-10">
+            <p className="text-lg text-center pb-4 font-semibold">Dilution</p>
+            <Select
+              borderColor="border-green-600"
+              selectedBorderColor="border-gray-500"
+              labelslist={[
+                {
+                  label: "Diluant",
+                  key: "Diluant",
+                },
+                {
+                  label: "White spirit Diluant",
+                  key: "White spirit Diluant",
+                },
+                {
+                  label: "Eau",
+                  key: "Eau",
+                },
+                {
+                  label: "Eau, Ne pas diluer de preference",
+                  key: "Eau, Ne pas diluer de preference",
+                },
+
+                { label: "Durcisseur", key: "Durcisseur" },
+
+                { label: "Thinner", key: "Thinner" },
+              ]}
+              onChangeHere={(item) =>
+                setInput((prev) => ({
+                  ...prev!,
+                  dilution: prev!.dilution === item ? "" : item,
+                }))
+              }
+              value={input.dilution}
+            />
+          </div>
+        </div>
+      )}
+
       <button
         onClick={HandlePost}
         className="bg-gray-600 text-white p-2 rounded-md w-full mt-4 hover:bg-gray-500 duration-150 flex items-center gap-2 justify-center"
@@ -339,5 +760,4 @@ function Page() {
     </div>
   );
 }
-
 export default Page;

@@ -29,6 +29,18 @@ input[type="number"]::-webkit-inner-spin-button {
   background-size: 200% auto;
   animation: gradientAnimation 2s linear infinite;
 }
+.styled-scrollbar::-webkit-scrollbar {
+  height: 5px;
+}
+
+.styled-scrollbar::-webkit-scrollbar-track {
+  background: white;
+}
+
+.styled-scrollbar::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 1rem;
+}
 
 @keyframes gradientAnimation {
   0% {
@@ -36,5 +48,24 @@ input[type="number"]::-webkit-inner-spin-button {
   }
   100% {
     background-position: 100% 50%;
+  }
+}
+
+.roll--hover:hover {
+  animation: roll 0.5s forwards;
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

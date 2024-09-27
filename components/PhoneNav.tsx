@@ -9,7 +9,7 @@ import Link from "next/link";
 const navs = [
   { title: "Colors", href: "/colors" },
   { title: "Products", href: "/products" },
-  { title: "Our Services", href: "/services" },
+  { title: "Painter", href: "/Painter" },
   { title: "Inspiration", href: "/inspiration" },
   { title: "How to & Tips", href: "/tips" },
 ];

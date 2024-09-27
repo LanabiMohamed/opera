@@ -8,6 +8,16 @@ export const GET = async (req: NextRequest) => {
 
     const url = new URL(req.url);
     const SearchParams = new URLSearchParams(url.searchParams);
+    const q = SearchParams.get("q");
+
+    if (q === "latest") {
+      const products = await Product.find()
+        .select("title imageUrl variances destination")
+        .sort({ createdAt: -1 })
+        .limit(6);
+      return new Response(JSON.stringify(products), { status: 200 });
+    }
+
     const p = Number(SearchParams.get("p") ?? 1);
     const type = SearchParams.get("type") ?? "Interior walls Paints";
 

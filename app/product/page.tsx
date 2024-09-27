@@ -16,6 +16,19 @@ interface Product {
     price: number;
   }[];
   colors: string[];
+  //Caracteristiques technique
+  densite: string;
+  rendement: string;
+  tempsSachage: string;
+  aspectdifilmsec: string[];
+  teinte: string;
+  viscosite: string;
+  //mise en oeuvre
+  dilution: string;
+  supports: string[];
+  materielApplication: string[];
+  nettoyageMateriel: string;
+  preparationSupport: string;
 }
 
 async function page({
@@ -36,8 +49,19 @@ async function page({
     properties,
     variances,
     colors,
+    densite,
+    rendement,
+    tempsSachage,
+    aspectdifilmsec,
+    teinte,
+    viscosite,
+    dilution,
+    supports,
+    materielApplication,
+    nettoyageMateriel,
+    preparationSupport,
   }: Product = await res.json();
-  console.log(colors);
+
   return (
     <div>
       <div className="flex gap-2 flex-col md:flex-row">
@@ -91,6 +115,58 @@ async function page({
           ))}
         </div>
       </div>
+      <div className="bg-gray-100 my-4 rounded-lg">
+        <h1 className="p-2 py-4 font-bold text-3xl text-[#0081ca] border-b border-gray-300">
+          Caracteristiques technique
+        </h1>
+        <div className="grid grid-cols-2 items-center gap-y-3 gap-x-1 p-2">
+          <h2 className="font-semibold">Densite</h2>
+          <p>{densite}</p>
+
+          <h2 className="font-semibold">Rendement</h2>
+          <p>{`${rendement} m² / ${
+            variances[0]?.quantity.split(" ")[1] ?? "L"
+          }`}</p>
+
+          <h2 className="font-semibold">Temps de Sachage</h2>
+          <p>{tempsSachage} h</p>
+
+          <h2 className="font-semibold">Aspect de film sec</h2>
+          {aspectdifilmsec.map((aspect) => (
+            <p key={aspect}>{aspect}</p>
+          ))}
+
+          {viscosite && (
+            <>
+              <h2 className="font-semibold">Viscosite</h2>
+              <p>{viscosite}</p>
+            </>
+          )}
+        </div>
+      </div>
+
+      <div className="bg-gray-100 my-4 rounded-lg">
+        <h1 className="p-2 py-4 font-bold text-3xl text-[#0081ca] border-b border-gray-300">
+          Mise en oeuvre
+        </h1>
+        <div className="grid grid-cols-2 items-center gap-y-3 gap-x-1 p-2">
+          <h2 className="font-semibold">Dilution</h2>
+          <p>{dilution}</p>
+
+          <h2 className="font-semibold">Supports</h2>
+          <p>{supports.join(", ")}</p>
+
+          <h2 className="font-semibold">Materiel d'Application</h2>
+          <p>{materielApplication?.join(", ")}</p>
+
+          <h2 className="font-semibold">Nettoyage du Materiel</h2>
+          <p>{nettoyageMateriel}</p>
+
+          <h2 className="font-semibold">Preparation du Support</h2>
+          <p>{preparationSupport}</p>
+        </div>
+      </div>
+
       <div className="bg-gray-100 my-4 rounded-lg">
         <h1 className="p-2 py-4 font-bold text-3xl text-[#0081ca] border-b border-gray-300">
           Fiche Technique
