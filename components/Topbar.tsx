@@ -5,11 +5,11 @@ import logo from "@public/logo.png";
 import Image from "next/image";
 
 const navs = [
-  { name: "Colors", href: "/colors" },
-  { name: "Products", href: "/products" },
-  { name: "Painter", href: "/painter" },
-  { name: "Inspiration", href: "/inspiration" },
-  { name: "How to & Tips", href: "/tips" },
+  // { title: "Colors", href: "/colors" },
+  { title: "Products", href: "/products" },
+  { title: "Painter", href: "/painter" },
+  // { title: "Inspiration", href: "/inspiration" },
+  { title: "How to & Tips", href: "/tips" },
 ];
 
 function TopBar() {
@@ -17,15 +17,15 @@ function TopBar() {
     <div>
       <div className="md:bg-black md:text-white border-b">
         <div className="flex justify-between max-w-[70rem] p-3 mx-auto items-center">
-          <PhoneNav />
+          <PhoneNav navs={navs} />
           <Link href="/">
             <Image alt="logo" src={logo} className="h-8 w-28" />
           </Link>
 
           <nav className="hidden md:flex gap-3">
             {navs.map((nav) => (
-              <Link key={nav.name} href={nav.href} className="hover:border-b">
-                {nav.name}
+              <Link key={nav.title} href={nav.href} className="hover:border-b">
+                {nav.title}
               </Link>
             ))}
           </nav>

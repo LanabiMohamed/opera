@@ -42,7 +42,12 @@ function page({
   const t = type ?? Types[0].name;
   return (
     <main>
-      <h1 className="text-3xl font-semibold my-1 md:my-4">Our Products</h1>
+      <h1 className="text-3xl font-semibold my-1 md:my-2">Our Products</h1>
+      <p className="text-gray-500 font-semibold mb-4">
+        Explore our range of high-quality wall paints designed to bring your
+        spaces to life with vibrant colors and long-lasting finishes.
+      </p>
+
       <div className="grid grid-cols-5 text-sm">
         {Types.map((type) => (
           <Link

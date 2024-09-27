@@ -6,15 +6,7 @@ import { GrLanguage } from "react-icons/gr";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Link from "next/link";
 
-const navs = [
-  { title: "Colors", href: "/colors" },
-  { title: "Products", href: "/products" },
-  { title: "Painter", href: "/Painter" },
-  { title: "Inspiration", href: "/inspiration" },
-  { title: "How to & Tips", href: "/tips" },
-];
-
-function PhoneNav() {
+function PhoneNav({ navs }: { navs: { title: string; href: string }[] }) {
   const [toggle, setToggle] = useState<"nav" | "lang" | undefined>();
   const selectedNav = [
     { key: "nav", icon: <IoMenuSharp size={30} /> },
