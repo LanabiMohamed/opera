@@ -16,14 +16,14 @@ interface Product {
     price: number;
   }[];
   colors: string[];
-  //Caracteristiques technique
+
   densite: string;
   rendement: string;
   tempsSachage: string;
   aspectdifilmsec: string[];
   teinte: string;
   viscosite: string;
-  //mise en oeuvre
+
   dilution: string;
   supports: string[];
   materielApplication: string[];
