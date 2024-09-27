@@ -156,7 +156,7 @@ async function page({
           <h2 className="font-semibold">Supports</h2>
           <p>{supports.join(", ")}</p>
 
-          <h2 className="font-semibold">Materiel d'Application</h2>
+          <h2 className="font-semibold">{"Materiel d'Application"}</h2>
           <p>{materielApplication?.join(", ")}</p>
 
           <h2 className="font-semibold">Nettoyage du Materiel</h2>
