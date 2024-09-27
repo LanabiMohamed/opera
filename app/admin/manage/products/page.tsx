@@ -631,7 +631,7 @@ function Page() {
 
           <div className="my-10">
             <p className="text-lg text-center pb-4 font-semibold">
-              Materiel d'application
+              {"Materiel d'application"}
             </p>
 
             <Select
