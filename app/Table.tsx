@@ -14,15 +14,15 @@ interface Product {
 }
 
 async function Table() {
-  const res = await fetch(`${process.env.URL}/api/products?q=latest`, {
-    cache: "no-cache",
-  });
-  if (!res.ok) return <div>Error Getting Products</div>;
-  const products = await res.json();
+  // const res = await fetch(`${process.env.URL}/api/products?q=latest`, {
+  //   cache: "no-cache",
+  // });
+  // if (!res.ok) return <div>Error Getting Products</div>;
+  // const products = await res.json();
 
   return (
     <div className="my-4">
-      <div className="flex gap-2 overflow-y-auto styled-scrollbar pb-2">
+      {/* <div className="flex gap-2 overflow-y-auto styled-scrollbar pb-2">
         {products.map((product: Product) => (
           <Link
             href={`/product?id=${product._id}`}
@@ -52,7 +52,7 @@ async function Table() {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

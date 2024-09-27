@@ -27,11 +27,13 @@ async function Table({
     p: string;
   };
 }) {
-  const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {
-    cache: "no-cache",
-  });
-  if (!res.ok) return <div>Error Getting Products</div>;
-  const { products, count } = await res.json();
+  // const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {
+  //   cache: "no-cache",
+  // });
+  // if (!res.ok) return <div>Error Getting Products</div>;
+  // const { products, count } = await res.json();
+  const { products, count } = { products: [], count: 0 };
+
   if (products.length === 0)
     return (
       <div className="flex justify-center items-center flex-col gap-4 py-32">

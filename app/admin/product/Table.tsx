@@ -5,12 +5,13 @@ import Link from "next/link";
 import Pagin from "./Pagin";
 
 async function Table({ p }: { p: string }) {
-  const res = await fetch(`${process.env.URL}/api/manage/products?p=${p}`, {
-    cache: "no-cache",
-  });
-  if (!res.ok) return <div>Failed to fetch</div>;
+  // const res = await fetch(`${process.env.URL}/api/manage/products?p=${p}`, {
+  //   cache: "no-cache",
+  // });
+  // if (!res.ok) return <div>Failed to fetch</div>;
 
-  const { products, count } = await res.json();
+  // const { products, count } = await res.json();
+  const { products, count } = { products: [], count: 0 };
   return (
     <div>
       {products.map(
@@ -20,10 +21,11 @@ async function Table({ p }: { p: string }) {
             title: string;
             imageUrl: string;
             type: string;
+            createdAt: string;
           },
           index: number
         ) => {
-          const datt = new Date(products[0].createdAt);
+          const datt = new Date(product.createdAt);
           return (
             <div
               key={product._id}

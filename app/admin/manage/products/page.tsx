@@ -105,7 +105,7 @@ function Page() {
         imageUrl: { image, id: product.imageUrl },
       }));
     };
-    HandleFetchProduct();
+    // HandleFetchProduct();
   }, [id]);
 
   const [variances, setVariances] = useState({
