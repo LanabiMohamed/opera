@@ -1,9 +1,8 @@
 // import { useEffect, useState } from "react";
-import { useState } from "react";
 
 function LoadImageClient({ Url, Css }: { Url: string; Css: string }) {
   console.log(Url, Css);
-  const [image, setImage] = useState();
+  // const [image, setImage] = useState();
   // useEffect(() => {
   //   const fetchImage = async () => {
   //     const res = await fetch(`/api/image/${Url}`);
@@ -13,11 +12,11 @@ function LoadImageClient({ Url, Css }: { Url: string; Css: string }) {
   //   fetchImage();
   // }, []);
   return <div className={`loading--background ${Css}`} />;
-  return image ? (
-    <img src={image} className={Css} />
-  ) : (
-    <div className={`loading--background ${Css}`} />
-  );
+  // return image ? (
+  //   <img src={image} className={Css} />
+  // ) : (
+  //   <div className={`loading--background ${Css}`} />
+  // );
 }
 
 export default LoadImageClient;

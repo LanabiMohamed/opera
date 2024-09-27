@@ -1,17 +1,17 @@
 // import LoadImage from "@components/LoadImage";
 // import Link from "next/link";
 
-interface Product {
-  _id: string;
-  imageUrl: string;
-  title: string;
-  definition: string;
-  destination: string[];
-  variances: {
-    quantity: string;
-    price: number;
-  }[];
-}
+// interface Product {
+//   _id: string;
+//   imageUrl: string;
+//   title: string;
+//   definition: string;
+//   destination: string[];
+//   variances: {
+//     quantity: string;
+//     price: number;
+//   }[];
+// }
 
 async function Table() {
   // const res = await fetch(`${process.env.URL}/api/products?q=latest`, {
