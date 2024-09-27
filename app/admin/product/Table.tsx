@@ -3,6 +3,7 @@ import { MdEdit } from "react-icons/md";
 import Delete from "./Delete";
 import Link from "next/link";
 import Pagin from "./Pagin";
+import { Suspense } from "react";
 
 async function Table({ p }: { p: string }) {
   const res = await fetch(`${process.env.URL}/api/manage/products?p=${p}`, {
@@ -39,10 +40,16 @@ async function Table({ p }: { p: string }) {
                 }}
                 className="flex gap-2 flex-1"
               >
-                <LoadImage
-                  Css="object-contain rounded-md w-36 md:w-52"
-                  Url={product.imageUrl}
-                />
+                <Suspense
+                  fallback={
+                    <div className="w-36 md:w-52 h-28 rounded-lg loading--background"></div>
+                  }
+                >
+                  <LoadImage
+                    Css="object-contain rounded-md w-36 md:w-52"
+                    Url={product.imageUrl}
+                  />
+                </Suspense>
                 <div className="whitespace-nowrap overflow-hidden">
                   <p className="font-semibold">{product.title}</p>
                   <p>{product.type}</p>

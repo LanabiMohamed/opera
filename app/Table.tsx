@@ -1,5 +1,6 @@
 import LoadImage from "@components/LoadImage";
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface Product {
   _id: string;
@@ -29,10 +30,16 @@ async function Table() {
             key={product._id}
             className="min-w-80"
           >
-            <LoadImage
-              Css="w-full h-32 md:h-52 object-contain rounded-lg"
-              Url={product.imageUrl}
-            />
+            <Suspense
+              fallback={
+                <div className="w-full h-32 md:h-52 rounded-lg loading--background"></div>
+              }
+            >
+              <LoadImage
+                Css="w-full h-32 md:h-52 object-contain rounded-lg"
+                Url={product.imageUrl}
+              />
+            </Suspense>
             <div className="p-1 font-semibold">
               <p>{product.title}</p>
               <p className="text-gray-800">

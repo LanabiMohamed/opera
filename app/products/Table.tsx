@@ -45,10 +45,16 @@ async function Table({
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
         {products.map((product: Product) => (
           <Link href={`/product?id=${product._id}`} key={product._id}>
-            <LoadImage
-              Css="w-full h-32 md:h-52 object-cover rounded-lg"
-              Url={product.imageUrl}
-            />
+            <Suspense
+              fallback={
+                <div className="w-full h-32 md:h-52 rounded-lg loading--background"></div>
+              }
+            >
+              <LoadImage
+                Css="w-full h-32 md:h-52 object-cover rounded-lg"
+                Url={product.imageUrl}
+              />
+            </Suspense>
             <div className="p-1 font-semibold">
               <p>{product.title}</p>
               <p className="text-gray-800">

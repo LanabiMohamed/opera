@@ -1,4 +1,5 @@
 import LoadImage from "@components/LoadImage";
+import { Suspense } from "react";
 import { FaCheck } from "react-icons/fa";
 import { FaFilePdf } from "react-icons/fa6";
 import { GrDocumentDownload } from "react-icons/gr";
@@ -62,10 +63,16 @@ async function page({
     <div>
       <div className="flex gap-2 flex-col md:flex-row">
         <section className="flex-1">
-          <LoadImage
-            Css="w-full h-96 object-contain rounded-lg"
-            Url={imageUrl}
-          />
+          <Suspense
+            fallback={
+              <div className="w-full h-96 rounded-lg loading--background"></div>
+            }
+          >
+            <LoadImage
+              Css="w-full h-96 object-contain rounded-lg"
+              Url={imageUrl}
+            />
+          </Suspense>
         </section>
         <section className="flex-1 p-4">
           <h2 className="text-3xl font-bold">{title}</h2>
