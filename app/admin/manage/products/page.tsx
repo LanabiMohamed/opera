@@ -66,46 +66,46 @@ function Page() {
   });
   useEffect(() => {
     if (!id) return;
-    // const HandleFetchProduct = async () => {
-    //   const res = await fetch(`/api/products/${id}`, {
-    //     cache: "no-cache",
-    //   });
-    //   if (!res.ok) {
-    //     notify({ type: "error", message: "Failed to fetch the product" });
-    //     return;
-    //   }
-    //   const product = await res.json();
-    //   setInput({
-    //     densite: "",
-    //     rendement: "",
-    //     tempsSachage: "",
-    //     aspectdifilmsec: [],
-    //     teinte: "",
-    //     viscosite: "",
-    //     dilution: "",
-    //     supports: [],
-    //     materielApplication: [],
-    //     nettoyageMateriel: "",
-    //     preparationSupport: "",
-    //     ...product,
-    //   });
-    //   setDensite(
-    //     product.densite
-    //       ? {
-    //           from: Number(product.densite.split(" ")[0]),
-    //           to: Number(product.densite.split(" ")[2]),
-    //           unit: product.densite.split(" ")[1],
-    //         }
-    //       : { from: 0, to: 0, unit: "-/+" }
-    //   );
-    //   const response = await fetch(`/api/image/${product.imageUrl}`);
-    //   const { image } = await response.json();
-    //   setInput((prev) => ({
-    //     ...prev!,
-    //     imageUrl: { image, id: product.imageUrl },
-    //   }));
-    // };
-    // HandleFetchProduct();
+    const HandleFetchProduct = async () => {
+      const res = await fetch(`/api/products/${id}`, {
+        cache: "no-cache",
+      });
+      if (!res.ok) {
+        notify({ type: "error", message: "Failed to fetch the product" });
+        return;
+      }
+      const product = await res.json();
+      setInput({
+        densite: "",
+        rendement: "",
+        tempsSachage: "",
+        aspectdifilmsec: [],
+        teinte: "",
+        viscosite: "",
+        dilution: "",
+        supports: [],
+        materielApplication: [],
+        nettoyageMateriel: "",
+        preparationSupport: "",
+        ...product,
+      });
+      setDensite(
+        product.densite
+          ? {
+              from: Number(product.densite.split(" ")[0]),
+              to: Number(product.densite.split(" ")[2]),
+              unit: product.densite.split(" ")[1],
+            }
+          : { from: 0, to: 0, unit: "-/+" }
+      );
+      const response = await fetch(`/api/image/${product.imageUrl}`);
+      const { image } = await response.json();
+      setInput((prev) => ({
+        ...prev!,
+        imageUrl: { image, id: product.imageUrl },
+      }));
+    };
+    HandleFetchProduct();
   }, [id]);
 
   const [variances, setVariances] = useState({

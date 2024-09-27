@@ -27,13 +27,11 @@ async function Table({
     p: string;
   };
 }) {
-  console.log(t);
-  // const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {
-  //   cache: "no-cache",
-  // });
-  // if (!res.ok) return <div>Error Getting Products</div>;
-  // const { products, count } = await res.json();
-  const { products, count } = { products: [], count: 0 };
+  const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {
+    cache: "no-cache",
+  });
+  if (!res.ok) return <div>Error Getting Products</div>;
+  const { products, count } = await res.json();
 
   if (products.length === 0)
     return (
