@@ -3,8 +3,8 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 function Loader() {
   return (
-    <div className="absolute top-0 left-0 w-full h-svh -z-10 flex justify-center items-center">
-      <ClimbingBoxLoader size={30} />
+    <div className="w-full py-52 flex justify-center items-center">
+      <ClimbingBoxLoader size={25} />
     </div>
   );
 }
