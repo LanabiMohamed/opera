@@ -27,6 +27,7 @@ async function Table({
     p: string;
   };
 }) {
+  console.log(t);
   // const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {
   //   cache: "no-cache",
   // });

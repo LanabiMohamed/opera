@@ -1,7 +1,7 @@
-import LoadImage from "@components/LoadImage";
-import { FaCheck } from "react-icons/fa";
-import { FaFilePdf } from "react-icons/fa6";
-import { GrDocumentDownload } from "react-icons/gr";
+// import LoadImage from "@components/LoadImage";
+// import { FaCheck } from "react-icons/fa";
+// import { FaFilePdf } from "react-icons/fa6";
+// import { GrDocumentDownload } from "react-icons/gr";
 
 interface Product {
   _id: string;
@@ -34,6 +34,7 @@ async function page({
 }: {
   searchParams: { id: string };
 }) {
+  console.log(id);
   // const res = await fetch(`${process.env.URL}/api/products/${id}`, {
   //   cache: "no-cache",
   // });

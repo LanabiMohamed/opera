@@ -1,4 +1,5 @@
 async function LoadImage({ Url, Css }: { Url: string; Css: string }) {
+  console.log(Url, Css);
   // const res = await fetch(`${process.env.URL}/api/image/${Url}`);
   // const { image } = await res.json();
 

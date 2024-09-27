@@ -1,5 +1,5 @@
-import LoadImage from "@components/LoadImage";
-import Link from "next/link";
+// import LoadImage from "@components/LoadImage";
+// import Link from "next/link";
 
 interface Product {
   _id: string;

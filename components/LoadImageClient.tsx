@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function LoadImageClient({ Url, Css }: { Url: string; Css: string }) {
+  console.log(Url, Css);
   const [image, setImage] = useState();
   // useEffect(() => {
   //   const fetchImage = async () => {
