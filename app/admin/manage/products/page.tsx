@@ -18,14 +18,12 @@ interface Product {
   destination: string[];
   properties: string[];
   variances: { quantity: string; price: number }[];
-  //Caracteristiques technique
   densite: string;
   rendement: string;
   tempsSachage: string;
   aspectdifilmsec: string[];
   teinte: string;
   viscosite: string;
-  //mise en oeuvre
   dilution: string;
   supports: string[];
   materielApplication: string[];

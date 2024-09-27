@@ -8,7 +8,6 @@ import Table from "./Table";
 import { Suspense } from "react";
 import { FaAngleUp } from "react-icons/fa6";
 import Link from "next/link";
-import emptyState from "@public/emptystate.png";
 
 const Types = [
   {
