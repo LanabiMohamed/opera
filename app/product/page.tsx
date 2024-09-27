@@ -3,31 +3,31 @@
 // import { FaFilePdf } from "react-icons/fa6";
 // import { GrDocumentDownload } from "react-icons/gr";
 
-interface Product {
-  _id: string;
-  imageUrl: string;
-  title: string;
-  type: string;
-  definition: string;
-  destination: string[];
-  properties: string[];
-  variances: {
-    quantity: string;
-    price: number;
-  }[];
-  colors: string[];
-  densite: string;
-  rendement: string;
-  tempsSachage: string;
-  aspectdifilmsec: string[];
-  teinte: string;
-  viscosite: string;
-  dilution: string;
-  supports: string[];
-  materielApplication: string[];
-  nettoyageMateriel: string;
-  preparationSupport: string;
-}
+// interface Product {
+//   _id: string;
+//   imageUrl: string;
+//   title: string;
+//   type: string;
+//   definition: string;
+//   destination: string[];
+//   properties: string[];
+//   variances: {
+//     quantity: string;
+//     price: number;
+//   }[];
+//   colors: string[];
+//   densite: string;
+//   rendement: string;
+//   tempsSachage: string;
+//   aspectdifilmsec: string[];
+//   teinte: string;
+//   viscosite: string;
+//   dilution: string;
+//   supports: string[];
+//   materielApplication: string[];
+//   nettoyageMateriel: string;
+//   preparationSupport: string;
+// }
 
 async function page({
   searchParams: { id },
