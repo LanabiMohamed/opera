@@ -119,8 +119,7 @@ function Page() {
     unit: "-/+",
   });
 
-  // if (!input)
-  return <Loader />;
+  if (!input) return <Loader />;
   const HandlePost = async () => {
     if (loading) return;
     if (
