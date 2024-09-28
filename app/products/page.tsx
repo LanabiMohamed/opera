@@ -23,7 +23,7 @@ function page({
       <Suspense
         fallback={
           <div>
-            <div className="w-1/2 md:w-1/3 h-32 md:h-52 object-cover rounded-lg loading--background" />
+            <div className="w-1/2 md:w-1/3 h-32 md:h-52 object-cover rounded-lg loading--background  my-3" />
             <div className="p-1">
               <div className="loading--background h-4 w-36 rounded-md" />
               <div className="loading--background h-4 w-24 rounded-md mt-2" />
