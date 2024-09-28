@@ -113,6 +113,7 @@ function Page() {
     price: 0,
     unit: "L",
   });
+
   const [densite, setDensite] = useState({
     from: 0,
     to: 0,
@@ -120,6 +121,7 @@ function Page() {
   });
 
   if (!input) return <Loader />;
+
   const HandlePost = async () => {
     if (loading) return;
     if (

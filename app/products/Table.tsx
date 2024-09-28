@@ -24,7 +24,7 @@ async function Table({
 }: {
   filters: {
     t: string;
-    p: string;
+    p: number;
   };
 }) {
   const res = await fetch(`${process.env.URL}/api/products?type=${t}&p=${p}`, {

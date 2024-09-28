@@ -13,7 +13,7 @@ function Footer() {
         <Image alt="Opera Peinture" src={logo} className="w-44 md:w-60 py-6" />
         <div>
           <h2 className="text-xl font-semibold pb-2">Download the app</h2>
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-center text-gray-600">
             <FaApple size={35} />
             <IoLogoGooglePlaystore size={35} />
           </div>
@@ -24,7 +24,7 @@ function Footer() {
           <h2 className="text-xl text-center md:text-start font-semibold pb-2">
             Connect With Us
           </h2>
-          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-gray-800">
+          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-gray-600">
             <a
               href="https://www.facebook.com/operapeintureofficiel/"
               target="_blank"
@@ -57,7 +57,7 @@ function Footer() {
             </a>
             <div className="flex items-center gap-2">
               <MdAlternateEmail size={35} />
-              <b>Contact@operapeinture.com</b>
+              <b className="text-black">Contact@operapeinture.com</b>
             </div>
           </div>
         </div>

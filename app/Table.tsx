@@ -23,12 +23,12 @@ async function Table() {
 
   return (
     <div className="my-4">
-      <div className="flex gap-2 overflow-y-auto styled-scrollbar pb-2">
+      <div className="flex gap-2 overflow-x-auto snap-x styled-scrollbar pb-2">
         {products.map((product: Product) => (
           <Link
             href={`/product?id=${product._id}`}
             key={product._id}
-            className="min-w-80"
+            className="min-w-52 md:min-w-80 snap-start"
           >
             <Suspense
               fallback={

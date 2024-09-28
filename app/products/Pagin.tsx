@@ -2,7 +2,7 @@
 import Pagination from "@mui/material/Pagination";
 import { useRouter, useSearchParams } from "next/navigation";
 
-function Pagin({ p, count }: { p: string; count: number }) {
+function Pagin({ p, count }: { p: number; count: number }) {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
 
@@ -12,10 +12,9 @@ function Pagin({ p, count }: { p: string; count: number }) {
 
     replace(`?${params.toString()}`);
   };
-
   return (
     <div className="flex justify-center">
-      <Pagination count={count} page={Number(p)} onChange={handleChange} />
+      <Pagination count={count} page={p} onChange={handleChange} />
     </div>
   );
 }
