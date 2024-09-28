@@ -3,8 +3,10 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState, useRef, useCallback } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { debounce } from "lodash";
+import Link from "next/link";
 
 interface Product {
+  _id: string;
   title: string;
   type: string;
   variances: {
@@ -27,6 +29,7 @@ function Search() {
 
   const fetchResults = async (query: string) => {
     const res = await fetch(`/api/products/search?q=${query}`);
+
     if (!res.ok) return setResults(undefined);
     const data = await res.json();
     setResults(data);
@@ -35,12 +38,8 @@ function Search() {
   const debouncedFetchResults = useCallback(
     debounce((query: string) => {
       if (!query) {
-        setResults({
-          products: [],
-          count: 0,
-        });
-      } else {
         setResults(undefined);
+      } else {
         fetchResults(query);
       }
     }, 500),
@@ -60,6 +59,7 @@ function Search() {
         inputRef.current &&
         !inputRef.current.contains(event.target as Node)
       ) {
+        setResults(undefined);
         setInput("");
       }
     };
@@ -69,6 +69,8 @@ function Search() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  console.log(results?.products);
 
   return (
     <div className="w-96 max-w-full mx-auto py-3 relative" ref={inputRef}>
@@ -90,14 +92,15 @@ function Search() {
             </div>
           )}
 
-          {results && !results.count && (
+          {results && results.products.length === 0 && (
             <div className="flex justify-center items-center h-32">
               No results found
             </div>
           )}
 
           {results?.products.map((result, index) => (
-            <div
+            <Link
+              href={`/product?id=${result._id}`}
               key={index}
               className="flex justify-between items-center border-b p-1 hover:bg-gray-100 cursor-pointer"
             >
@@ -106,7 +109,7 @@ function Search() {
                 <p className="text-gray-600">{result.type}</p>
               </div>
               <p>{result.variances[0].price} Dzd</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}
