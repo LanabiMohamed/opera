@@ -28,8 +28,8 @@ function Search() {
   const inputRef = useRef<HTMLDivElement>(null);
 
   const fetchResults = async (query: string) => {
+    setResults(undefined);
     const res = await fetch(`/api/products/search?q=${query}`);
-
     if (!res.ok) return setResults(undefined);
     const data = await res.json();
     setResults(data);
