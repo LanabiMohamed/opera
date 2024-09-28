@@ -5,11 +5,11 @@ import logo from "@public/logo.png";
 import Image from "next/image";
 
 const navs = [
-  // { title: "Colors", href: "/colors" },
   { title: "Products", href: "/products" },
   { title: "Painter", href: "/painter" },
   // { title: "Inspiration", href: "/inspiration" },
   { title: "How to & Tips", href: "/tips" },
+  { title: "About us", href: "/aboutus" },
 ];
 
 function TopBar() {
