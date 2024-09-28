@@ -30,17 +30,17 @@ export default function Home() {
     {
       src: painter,
       title: "Professional Painters",
-      href: "/",
+      href: "/painter",
     },
     {
       src: extiror,
       title: "Paints",
-      href: "/",
+      href: "/products",
     },
     {
       src: conseils,
       title: "Conseils",
-      href: "/",
+      href: "/tips",
     },
   ];
   return (
