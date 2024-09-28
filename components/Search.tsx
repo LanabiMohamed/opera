@@ -70,8 +70,6 @@ function Search() {
     };
   }, []);
 
-  console.log(results?.products);
-
   return (
     <div className="w-96 max-w-full mx-auto py-3 relative" ref={inputRef}>
       <TextField
@@ -101,6 +99,10 @@ function Search() {
           {results?.products.map((result, index) => (
             <Link
               href={`/product?id=${result._id}`}
+              onClick={() => {
+                setResults(undefined);
+                setInput("");
+              }}
               key={index}
               className="flex justify-between items-center border-b p-1 hover:bg-gray-100 cursor-pointer"
             >
