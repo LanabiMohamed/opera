@@ -6,7 +6,7 @@ import { debounce } from "lodash";
 import Link from "next/link";
 import { InputAdornment } from "@mui/material";
 import { CiSearch } from "react-icons/ci";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface Product {
   _id: string;
@@ -20,7 +20,6 @@ interface Product {
 
 function Search() {
   const pathname = usePathname();
-  if (pathname === "/search") return;
   const [input, setInput] = useState("");
   const [results, setResults] = useState<
     | {
@@ -75,6 +74,7 @@ function Search() {
     };
   }, []);
 
+  if (pathname === "/search") return;
   return (
     <div className="w-96 max-w-[90%] mx-auto py-3 relative" ref={inputRef}>
       <TextField
