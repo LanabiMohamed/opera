@@ -30,7 +30,10 @@ export const GET = async (req: NextRequest) => {
     if (search) {
       query = {
         ...query,
-        title: { $regex: search, $options: "i" },
+        $or: [
+          { title: { $regex: search, $options: "i" } },
+          { type: { $regex: search, $options: "i" } },
+        ],
       };
     }
 

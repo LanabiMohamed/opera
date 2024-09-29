@@ -127,6 +127,19 @@ function Search() {
               <p>{result.variances[0].price} Dzd</p>
             </Link>
           ))}
+          {results && results.count > 6 && (
+            <div className="flex justify-center my-1">
+              <Link
+                href={{
+                  pathname: "/search",
+                  query: { search: input },
+                }}
+                className="underline"
+              >
+                {`See all ${results.count} results`}
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </div>
