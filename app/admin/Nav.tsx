@@ -9,7 +9,7 @@ function Nav() {
     <nav className="border-b flex">
       <Link
         href="/admin"
-        className={`p-4 ${
+        className={`p-4 py-2 ${
           pathname === "/admin" ? "font-semibold border-b border-black" : ""
         }`}
       >
@@ -18,7 +18,7 @@ function Nav() {
 
       <Link
         href="/admin/manage"
-        className={`p-4  ${
+        className={`p-4 py-2  ${
           pathname === "/admin/manage"
             ? "font-semibold border-b border-black"
             : "hover:scale-125 duration-200"

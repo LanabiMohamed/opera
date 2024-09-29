@@ -8,7 +8,7 @@ function layout({
 }>) {
   const AdminPw = process.env.adminPw!;
   return (
-    <main className="max-w-[70rem] mx-auto p-2">
+    <main className="max-w-[70rem] mx-auto p-2 pt-0">
       <CheckAdmin AdminPw={AdminPw}>
         <Nav />
         {children}
