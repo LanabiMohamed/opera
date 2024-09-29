@@ -9,6 +9,7 @@ import { IoMdAdd } from "react-icons/io";
 import { IoTrashBinSharp } from "react-icons/io5";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import ListManager from "@components/ListManager";
 
 interface Product {
   imageUrl: { image: string; id: string };
@@ -148,6 +149,7 @@ function Page() {
       method: id ? "PATCH" : "POST",
       headers: {
         "Content-Type": "Application/Json",
+        "x-auth-token": localStorage.getItem("token") ?? "",
       },
       body: JSON.stringify({
         ...input,
@@ -264,38 +266,34 @@ function Page() {
       <h3 className="text-xl text-center font-semibold mt-20 mb-4">
         Properties
       </h3>
-      <Select
-        borderColor="border-green-600"
-        selectedBorderColor="border-gray-500"
-        labelslist={[
-          { label: "Tres haute resistance", key: "Tres haute resistance" },
-          { label: "Extra brilliant", key: "Extra brilliant" },
-          {
-            label: "Effects decoratifs metallise",
-            key: "Effects decoratifs metallise",
-          },
-          { label: "Durable", key: "Hotel" },
-          { label: "Tres bonne tenue", key: "Tres bonne tenue" },
-          { label: "Tres faible odeur", key: "Tres faible odeur" },
-          { label: "Seche rapidement", key: "Seche rapidement" },
-          { label: "Ne jaunissant", key: "Ne jaunissant" },
-          {
-            label: "Excellente adherence surface lisse",
-            key: "Excellente adherence surface lisse",
-          },
-          { label: "Facile a applique", key: "Facile a applique" },
-          { label: "Tres opacifiante", key: "Tres opacifiante" },
-        ]}
-        onChangeHere={(item) =>
+
+      <ListManager
+        list={input.properties}
+        title=""
+        HandlingAdd={(item) => {
+          setInput((prev) => {
+            if (prev!.properties.includes(item)) {
+              notify({
+                type: "warning",
+                message: "This is already mentioned",
+              });
+              return prev;
+            }
+            return {
+              ...prev!,
+              properties: [...prev!.properties, item],
+            };
+          });
+        }}
+        HandlingRemove={(item) => {
           setInput((prev) => ({
             ...prev!,
-            properties: prev!.properties.includes(item)
-              ? prev!.properties.filter((sub) => sub !== item)
-              : [...prev!.properties, item],
-          }))
-        }
-        value={input.properties}
-        multi
+            properties: [
+              ...prev!.properties.filter((element: string) => element !== item),
+            ],
+          }));
+        }}
+        rtl={false}
       />
 
       <h3 className="text-xl text-center font-semibold mt-20 mb-4">

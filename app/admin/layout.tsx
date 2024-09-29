@@ -1,3 +1,4 @@
+import CheckAdmin from "@components/CheckAdmin";
 import Nav from "./Nav";
 
 function layout({
@@ -5,9 +6,13 @@ function layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const AdminPw = process.env.adminPw!;
   return (
     <main className="max-w-[70rem] mx-auto p-2">
-      <Nav /> {children}
+      <CheckAdmin AdminPw={AdminPw}>
+        <Nav />
+        {children}
+      </CheckAdmin>
     </main>
   );
 }

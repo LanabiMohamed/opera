@@ -6,6 +6,7 @@ import Pagin from "./Pagin";
 import { Suspense } from "react";
 
 async function Table({ p }: { p: string }) {
+  const token = process.env.adminPw ?? "";
   const res = await fetch(`${process.env.URL}/api/manage/products?p=${p}`, {
     cache: "no-cache",
   });
@@ -72,7 +73,7 @@ async function Table({ p }: { p: string }) {
                     className="cursor-pointer hover:scale-110 duration-150"
                   />
                 </Link>
-                <Delete id={product._id} />
+                <Delete id={product._id} token={token} />
               </div>
             </div>
           );

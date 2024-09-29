@@ -19,9 +19,14 @@ function TopBar() {
         <div className="flex justify-between max-w-[70rem] p-3 mx-auto items-center">
           <PhoneNav navs={navs} />
           <Link href="/">
-            <Image alt="logo" src={logo} className="h-8 w-28" />
+            <Image
+              alt="logo"
+              src={logo}
+              height={32}
+              width={90}
+              className="w-auto h-auto"
+            />
           </Link>
-
           <nav className="hidden md:flex gap-3">
             {navs.map((nav) => (
               <Link key={nav.title} href={nav.href} className="hover:border-b">

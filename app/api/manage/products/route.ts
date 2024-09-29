@@ -29,8 +29,15 @@ export const GET = async (req: NextRequest) => {
 
 export const POST = async (req: NextRequest) => {
   try {
-    await connectToDatabase();
+    const token = req.headers.get("x-auth-token");
 
+    if (token !== process.env.adminPw) {
+      return new Response(JSON.stringify({ message: "Unauthorized" }), {
+        status: 401,
+      });
+    }
+
+    await connectToDatabase();
     const product = await req.json();
 
     await Product.create(product);
@@ -43,6 +50,14 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
+    const token = req.headers.get("x-auth-token");
+
+    if (token !== process.env.adminPw) {
+      return new Response(JSON.stringify({ message: "Unauthorized" }), {
+        status: 401,
+      });
+    }
+
     await connectToDatabase();
 
     const { id } = await req.json();
@@ -57,6 +72,14 @@ export const DELETE = async (req: NextRequest) => {
 
 export const PATCH = async (req: NextRequest) => {
   try {
+    const token = req.headers.get("x-auth-token");
+
+    if (token !== process.env.adminPw) {
+      return new Response(JSON.stringify({ message: "Unauthorized" }), {
+        status: 401,
+      });
+    }
+
     await connectToDatabase();
 
     const data = await req.json();
