@@ -121,7 +121,7 @@ function Page() {
     unit: "-/+",
   });
 
-  if (!input) return <Loader />;
+  if (!input) return <Loader title="Loading product's data..." />;
 
   const HandlePost = async () => {
     if (loading) return;
