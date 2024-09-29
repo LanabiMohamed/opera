@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineDelete } from "react-icons/md";
-import { notify } from "./Sonner";
 
 function ListManager({
   title,
