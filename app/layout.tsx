@@ -22,7 +22,9 @@ export default function RootLayout({
       <body>
         <main className="text-sm md:text-base">
           <Sonner />
+
           <TopBar />
+
           {children}
           <Footer />
         </main>

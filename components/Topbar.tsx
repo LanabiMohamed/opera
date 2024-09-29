@@ -22,8 +22,7 @@ function TopBar() {
             <Image
               alt="logo"
               src={logo}
-              height={32}
-              width={90}
+              height={26}
               className="w-auto h-auto"
             />
           </Link>
@@ -37,6 +36,7 @@ function TopBar() {
           <div className="md:hidden w-10" />
         </div>
       </div>
+
       <Search />
     </div>
   );

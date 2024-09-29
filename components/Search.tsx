@@ -4,6 +4,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { debounce } from "lodash";
 import Link from "next/link";
+import { InputAdornment } from "@mui/material";
+import { CiSearch } from "react-icons/ci";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface Product {
   _id: string;
@@ -16,6 +19,8 @@ interface Product {
 }
 
 function Search() {
+  const pathname = usePathname();
+  if (pathname === "/search") return;
   const [input, setInput] = useState("");
   const [results, setResults] = useState<
     | {
@@ -81,6 +86,15 @@ function Search() {
         type="search"
         fullWidth
         size="small"
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <CiSearch />
+              </InputAdornment>
+            ),
+          },
+        }}
       />
       {!!input.length && (
         <div className="overflow-hidden absolute w-full border border-gray-300 shadow-md bg-white rounded-md mt-1 z-10">
