@@ -30,6 +30,17 @@ interface Product {
   preparationSupport: string;
 }
 
+const bgs = [
+  "bg-red-600",
+  "bg-blue-600",
+  "bg-green-600",
+  "bg-yellow-600",
+  "bg-purple-600",
+  "bg-pink-600",
+  "bg-indigo-600",
+  "bg-gray-600",
+];
+
 async function page({
   searchParams: { id },
 }: {
@@ -61,7 +72,7 @@ async function page({
 
   return (
     <div>
-      <div className="flex gap-2 flex-col md:flex-row">
+      <div className="flex gap-0 md:gap-2 flex-col md:items-center md:flex-row">
         <section className="flex-1">
           <Suspense
             fallback={
@@ -69,12 +80,12 @@ async function page({
             }
           >
             <LoadImage
-              Css="w-full h-96 object-contain rounded-lg"
+              Css="w-full md:h-96 object-contain rounded-lg"
               Url={imageUrl}
             />
           </Suspense>
         </section>
-        <section className="flex-1 p-4">
+        <section className="flex-1 p-2 md:p-4">
           <h2 className="text-3xl font-bold">{title}</h2>
           <h2 className="text-2xl font-bold text-gray-600">{type}</h2>
           <div className="flex flex-wrap gap-2 my-2">
@@ -86,17 +97,19 @@ async function page({
           </div>
           <p className="font-semibold text-gray-600 py-6">{definition}</p>
           <p className="text-xl font-semibold mb-2">Prices</p>
-          <div className="flex flex-wrap gap-2">
-            {variances.map((v) => (
-              <div
-                key={v.quantity}
-                className="border p-2 rounded-md border-black text-lg text-center"
-              >
-                <p>{v.quantity}</p>
-                <div className=" w-full h-[1px] my-1 bg-gray-700"></div>
-                <p>
-                  <b>{v.price}</b> Dzd
-                </p>
+          <div className="flex flex-wrap gap-2 whitespace-nowrap">
+            {variances.map((v, index) => (
+              <div key={v.quantity} className={`text-center ${bgs[index]}`}>
+                <div className="flex justify-between pb-2 w-full">
+                  <div className="triangle" />
+                  <div className="h-2 w-2 mt-1  bg-white rounded-full" />
+                  <div className="triangle--right" />
+                </div>
+
+                <p className="text-white font-bold px-2">{v.price} Dzd</p>
+                <div className="bg-white m-2 py-4">
+                  <p>{v.quantity}</p>
+                </div>
               </div>
             ))}
           </div>

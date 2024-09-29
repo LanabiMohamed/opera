@@ -71,7 +71,7 @@ function Search() {
   }, []);
 
   return (
-    <div className="w-96 max-w-full mx-auto py-3 relative" ref={inputRef}>
+    <div className="w-96 max-w-[90%] mx-auto py-3 relative" ref={inputRef}>
       <TextField
         label="Search field"
         value={input}
@@ -83,7 +83,7 @@ function Search() {
         size="small"
       />
       {!!input.length && (
-        <div className="overflow-hidden absolute w-full border border-gray-300 shadow-md bg-white rounded-md mt-1">
+        <div className="overflow-hidden absolute w-full border border-gray-300 shadow-md bg-white rounded-md mt-1 z-10">
           {!results && (
             <div className="flex justify-center items-center h-32">
               <ClipLoader size={30} />

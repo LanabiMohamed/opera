@@ -63,7 +63,7 @@ async function Table({ p }: { p: string }) {
               <div>
                 <Link
                   href={{
-                    pathname: "/admin/manage/products",
+                    pathname: "/admin/manage",
                     query: { id: product._id },
                   }}
                 >

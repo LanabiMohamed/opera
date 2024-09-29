@@ -5,6 +5,7 @@ import efficiency from "@public/painter/efficiency.png";
 import insurance from "@public/painter/insurance.png";
 import quality from "@public/painter/quality.png";
 import right from "@public/painter/right.png";
+import Agencies from "@components/Agencies";
 
 function page() {
   const whys = [
@@ -59,14 +60,17 @@ function page() {
           <h2 className="text-2xl font-semibold my-3">
             How do you get the service?
           </h2>
-          <div className="text-gray-500 pl-2">
-            <p>1. Register your information, and schedule a visit.</p>
-            <p>
-              2. The painter will visit you to inspect your wall, determine the
+          <div className="text-gray-700 pl-2">
+            <p className="my-1">1. Select the closest city to you below.</p>
+            <p className="my-1">
+              2. You can Call or Go to the agency location.
+            </p>
+            <p className="my-1">
+              3. The painter will visit you to inspect your wall, determine the
               necessary products, and the painting cost.
             </p>
-            <p>
-              3. We will deliver the products to you, and the painter will then
+            <p className="my-1">
+              4. We will deliver the products to you, and the painter will then
               implement the paint to ensure a perfect result for your space.
             </p>
           </div>
@@ -93,6 +97,8 @@ function page() {
           </div>
         ))}
       </div>
+
+      <Agencies />
     </main>
   );
 }
