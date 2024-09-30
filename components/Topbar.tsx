@@ -3,6 +3,7 @@ import PhoneNav from "./PhoneNav";
 import Search from "./Search";
 import logo from "@public/logo.png";
 import Image from "next/image";
+import AdminLink from "./AdminLink";
 
 const navs = [
   { title: "Products", href: "/products" },
@@ -32,6 +33,7 @@ function TopBar() {
                 {nav.title}
               </Link>
             ))}
+            <AdminLink adminPw={process.env.adminPw} />
           </nav>
           <div className="md:hidden w-10" />
         </div>
