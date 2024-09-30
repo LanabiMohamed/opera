@@ -32,7 +32,7 @@ function PhoneNav({
       />
 
       {toggle && (
-        <div className="fixed top-0 left-0 h-svh w-full flex z-10 text-black">
+        <div className="fixed top-0 left-0 h-svh w-full flex z-10 text-black backdrop-blur-sm">
           <main className="flex-1 bg-white sideIn shadow-xl border">
             <nav className="flex border-b">
               {selectedNav.map((nav) => (
@@ -76,11 +76,8 @@ function PhoneNav({
               )} */}
             </div>
           </main>
-          <aside
-            className="backdrop-blur-sm p-3"
-            onClick={() => setToggle(undefined)}
-          >
-            <RxCross1 size={30} color="white" />
+          <aside className="p-3" onClick={() => setToggle(undefined)}>
+            <RxCross1 size={30} color="gray" />
           </aside>
         </div>
       )}
