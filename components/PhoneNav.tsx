@@ -33,8 +33,8 @@ function PhoneNav({
 
       {toggle && (
         <div className="fixed top-0 left-0 h-svh w-full flex z-10 text-black">
-          <main className="flex-1 bg-white sideIn">
-            <nav className="flex">
+          <main className="flex-1 bg-white sideIn shadow-xl border">
+            <nav className="flex border-b">
               {selectedNav.map((nav) => (
                 <button
                   className={`flex-1 p-2 flex items-center justify-center ${
