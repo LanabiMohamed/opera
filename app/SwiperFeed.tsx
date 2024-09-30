@@ -41,10 +41,10 @@ function SwiperFeed({ products }: { products: Product[] }) {
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={7}
-        slidesPerView={1.5}
+        slidesPerView={1.4}
         breakpoints={{
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2.5,
             spaceBetween: 7,
           },
         }}
@@ -57,11 +57,11 @@ function SwiperFeed({ products }: { products: Product[] }) {
         {products.map((product: Product) => (
           <SwiperSlide
             key={product._id}
-            className="pb-12 md:max-w-[34%] max-w-[50%] px-1"
+            className="mb-12 md:max-w-[40%] max-w-[75%] px-1 "
           >
             <Link href={`/product?id=${product._id}`}>
               <LoadImageClient
-                Css="w-full h-32 md:h-52 object-contain rounded-lg"
+                Css="w-full h-44 md:h-52 object-cover rounded-lg"
                 Url={product.imageUrl}
               />
 

@@ -84,7 +84,7 @@ export default function Home() {
         </Suspense>
       </section>
 
-      <section className="max-w-[70rem] mx-auto my-10 p-4">
+      <section className="max-w-[70rem] mx-auto my-10 p-2">
         <h2 className="text-xl font-bold pb-2">Are you looking for...</h2>
         <div className="flex flex-col md:flex-row justify-between gap-4">
           {offers.map(
@@ -98,7 +98,7 @@ export default function Home() {
                   <Image
                     src={src}
                     alt={title}
-                    className="object-cover w-full h-48 md:h-36 rounded-md hover:scale-105 duration-150 cursor-pointer"
+                    className="object-cover w-full h-48 rounded-md hover:scale-105 duration-150 cursor-pointer"
                   />
 
                   <p className="font-semibold text-center">{title}</p>
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-[70rem] mx-auto my-10 p-4">
+      <section className="max-w-[70rem] mx-auto my-10 p-2">
         <h2 className="text-xl font-bold pb-2">What makes us special?</h2>
         <div className="flex flex-col md:flex-row justify-between ">
           {special.map(
