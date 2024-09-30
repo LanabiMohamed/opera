@@ -11,7 +11,7 @@ function page() {
         Discover expert tips and step-by-step guides to achieve flawless
         painting results for every project.
       </p>
-      <section className="flex flex-col md:flex-row items-center md:gap-8 mb-8">
+      <section className="flex flex-col md:flex-row md:items-center md:gap-8 mb-8">
         <div className="flex-1">
           <Image
             alt="wet Wall Picture"
@@ -49,7 +49,7 @@ function page() {
         </div>
       </section>
 
-      <section className="flex flex-col md:flex-row items-center md:gap-8">
+      <section className="flex flex-col md:flex-row md:items-center md:gap-8">
         <div className="flex-1 text-end">
           <h2 className="text-2xl font-semibold my-3">
             كيفية معالجة الرطوبة في الجدران؟
@@ -117,7 +117,7 @@ function page() {
         </div>
       </div>
 
-      <section className="flex flex-col md:flex-row items-center md:gap-8 mt-8">
+      <section className="flex flex-col md:flex-row md:items-center md:gap-8 mt-8">
         <div className="flex-1">
           <Image
             alt="wet Wall Picture"

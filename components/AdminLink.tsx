@@ -1,15 +1,22 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 function AdminLink({ adminPw }: { adminPw?: string }) {
-  if (localStorage.getItem("token") === adminPw) {
-    return (
-      <Link href="/admin" className="hover:border-b">
-        Admin
-      </Link>
-    );
-  }
-  return <></>;
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    if (localStorage && localStorage.getItem("token") === adminPw) {
+      setIsAdmin(true);
+    }
+  }, []);
+
+  return isAdmin ? (
+    <Link href="/admin" className="hover:border-b">
+      Admin
+    </Link>
+  ) : (
+    <></>
+  );
 }
 
 export default AdminLink;
