@@ -33,7 +33,7 @@ function Search() {
 
   const fetchResults = async (query: string) => {
     setResults(undefined);
-    const res = await fetch(`/api/products/search?q=${query}`);
+    const res = await fetch(`/api/products?search=${query}`);
     if (!res.ok) return setResults(undefined);
     const data = await res.json();
     setResults(data);
@@ -127,7 +127,7 @@ function Search() {
               <p>{result.variances[0].price} Dzd</p>
             </Link>
           ))}
-          {results && results.count > 6 && (
+          {results && results.count > 1 && (
             <div className="flex justify-center my-1">
               <Link
                 href={{
@@ -136,7 +136,7 @@ function Search() {
                 }}
                 className="underline"
               >
-                {`See all ${results.count} results`}
+                {`See more then ${results.count * 6} results`}
               </Link>
             </div>
           )}

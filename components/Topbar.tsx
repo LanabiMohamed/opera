@@ -18,7 +18,7 @@ function TopBar() {
     <div>
       <div className="md:bg-black md:text-white border-b">
         <div className="flex justify-between max-w-[70rem] p-3 mx-auto items-center">
-          <PhoneNav navs={navs} />
+          <PhoneNav navs={navs} adminPw={process.env.adminPw} />
           <Link href="/">
             <Image
               alt="logo"
