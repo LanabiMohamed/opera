@@ -4,13 +4,24 @@ import { IoMenuSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 // import { GrLanguage } from "react-icons/gr";
 import Link from "next/link";
+import AdminLink from "./AdminLink";
 
-function PhoneNav({ navs }: { navs: { title: string; href: string }[] }) {
+function PhoneNav({
+  navs,
+  adminPw,
+}: {
+  navs: { title: string; href: string }[];
+  adminPw?: string;
+}) {
   const [toggle, setToggle] = useState<"nav" | "lang" | undefined>();
   const selectedNav = [
     { key: "nav", icon: <IoMenuSharp size={30} /> },
     // { key: "lang", icon: <GrLanguage size={30} /> },
   ];
+
+  const ToggleOff = () => {
+    setToggle(undefined);
+  };
   return (
     <div className="block md:hidden">
       <IoMenuSharp
@@ -34,7 +45,6 @@ function PhoneNav({ navs }: { navs: { title: string; href: string }[] }) {
                   key={nav.key}
                   onClick={() => {
                     setToggle(nav.key as "nav" | "lang");
-                    console.log(nav.key);
                   }}
                 >
                   {nav.icon}
@@ -42,19 +52,23 @@ function PhoneNav({ navs }: { navs: { title: string; href: string }[] }) {
               ))}
             </nav>
             <div className="px-2">
-              {toggle === "nav" &&
-                navs.map((nav) => (
-                  <div key={nav.title}>
-                    <Link
-                      onClick={() => setToggle(undefined)}
-                      href={nav.href}
-                      className="flex justify-between items-center py-3 text-gray-700"
-                    >
-                      <p>{nav.title}</p>
-                    </Link>
-                    <div className="w-full bg-gray-400 h-[1px]" />
-                  </div>
-                ))}
+              {toggle === "nav" && (
+                <>
+                  {navs.map((nav) => (
+                    <div key={nav.title}>
+                      <Link
+                        onClick={() => setToggle(undefined)}
+                        href={nav.href}
+                        className="flex justify-between items-center py-3 text-gray-700"
+                      >
+                        <p>{nav.title}</p>
+                      </Link>
+                      <div className="w-full bg-gray-400 h-[1px]" />
+                    </div>
+                  ))}
+                  <AdminLink ToggleOff={ToggleOff} adminPw={adminPw} />
+                </>
+              )}
               {/* {toggle === "lang" && (
                 <div>
                   <h2 className="font-semibold">Language</h2>
