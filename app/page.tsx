@@ -9,6 +9,7 @@ import conseils from "@public/conseils.jpg";
 import Link from "next/link";
 import { Suspense } from "react";
 import Table from "./Table";
+import { RiArrowLeftWideFill, RiArrowRightWideFill } from "react-icons/ri";
 
 export default function Home() {
   const special = [
@@ -50,11 +51,19 @@ export default function Home() {
         alt="cover image"
         className="object-cover md:max-h-[29rem] min-h-56 w-full"
       />
-      <section className="max-w-[70rem] mx-auto my-10 p-4">
-        <h2 className="text-xl font-bold pb-2">Latest products of this week</h2>
+      <section className="max-w-[70rem] mx-auto my-10 p-2">
         <Suspense
           fallback={
             <div>
+              <div className="flex justify-between pb-4">
+                <h2 className="text-xl font-bold">
+                  Latest products of this week
+                </h2>
+                <div className="flex justify-end text-gray-500 mt-2">
+                  <RiArrowLeftWideFill size={30} />
+                  <RiArrowRightWideFill size={30} />
+                </div>
+              </div>
               <div className="w-1/2 md:w-1/3 h-32 md:h-52 object-cover rounded-lg loading--background" />
               <div className="p-1">
                 <div className="loading--background h-4 w-36 rounded-md" />
